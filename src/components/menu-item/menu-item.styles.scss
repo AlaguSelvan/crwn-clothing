@@ -11,7 +11,6 @@
 
   &:hover {
     cursor: pointer;
-
     & .background-image {
       transform: scale(1.1);
       transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
@@ -23,12 +22,12 @@
       -moz-transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
       -ms-transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
       -o-transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-}
+    }
     & .content {
       opacity: 0.9;
     }
   } 
-  &:large {
+  &.large {
     height: 380px ;
   }
 
