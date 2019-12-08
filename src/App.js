@@ -8,7 +8,7 @@ import ShopPage from './pages/shop/shop.component'
 import SignInAndSignOut from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 import Header from './components/header/header.component'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+// import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 class App extends React.Component {
   constructor() {
@@ -55,7 +55,7 @@ class App extends React.Component {
               currentUser ? (
                 <Redirect to="/" />
                 ) : (
-                  <SignInAndSignUpPage />
+                  <SignInAndSignOut />
               )
           }
           // component={SignInAndSignOut} 
