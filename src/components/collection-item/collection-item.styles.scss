@@ -1,16 +1,9 @@
 .collection-item {
-  width: 22%;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  width: 22vw;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   height: 350px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   position: relative;
 
   .image {
@@ -20,6 +13,7 @@
     background-position: center;
     margin-bottom: 5px;
   }
+
   .custom-button {
     width: 80%;
     opacity: 0.7;
@@ -32,11 +26,9 @@
     .image {
       opacity: 0.8;
     }
-    
+
     .custom-button {
       opacity: 0.85;
-      display: -webkit-box;
-      display: -ms-flexbox;
       display: flex;
     }
   }
@@ -44,12 +36,8 @@
   .collection-footer {
     width: 100%;
     height: 5%;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    justify-content: space-between;
     font-size: 18px;
 
     .name {
