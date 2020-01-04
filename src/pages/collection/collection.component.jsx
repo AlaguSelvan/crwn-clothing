@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { firestore } from '../../firebase/firebase.utils';
 
 import CollectionItem from '../../components/collection-item/collection-item.component';
 
@@ -12,6 +13,16 @@ import {
 } from './collection.styles';
 
 const CollectionPage = ({ collection }) => {
+  useEffect(() => {
+    console.log('subscribing')
+    const unsubscribeFromCollections = firestore
+      .collection('collections')
+      .onSnapshot(snapshot => console.log(snapshot, 'snapshot'))
+      return () => {
+      console.log('unsubscribing')
+      unsubscribeFromCollections()
+    };
+  }, [])
   const { title, items } = collection;
   return (
     <CollectionPageContainer>
