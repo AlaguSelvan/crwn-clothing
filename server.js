@@ -33,13 +33,16 @@ app.post('/payment', async(req, res) => {
   const body = {
     source: req.body.token.id,
     amount: req.body.amount,
-    currency: 'usd'
+    currency: 'inr',
+    description: 'test'
   };
-
+  console.log('hit ')
   stripe.charges.create(body, (stripeErr, stripeRes) => {
     if (stripeErr) {
-      res.status(500).send({ error: stripeErr })
+      console.log(stripeErr, 'stripeErr')
+      // res.status(500).send({ error: stripeErr })
     } else {
+      console.log(stripeRes, 'stripeRes')
       res.status(200).send({ success: stripeRes })
     }
   })
