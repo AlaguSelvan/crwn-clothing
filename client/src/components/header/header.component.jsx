@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
+import { auth } from '../../firebase/firebase.utils'
+
+import CurrentUserContext from '../../contexts/current-user/current-user.context'
+import { CartContext } from '../../providers/cart/cart.provider'
 
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -17,37 +22,36 @@ import {
   OptionLink
 } from './header.styles';
 
-const Header = ({ currentUser, hidden, signOutStart }) => (
-  <HeaderContainer>
-    <LogoContainer to='/'>
-      <Logo className='logo' />
-    </LogoContainer>
-    <OptionsContainer>
-      <OptionLink to='/shop'>SHOP</OptionLink>
-      <OptionLink to='/shop'>CONTACT</OptionLink>
-      {currentUser ? (
-        <OptionLink as='div' to='/signin' onClick={signOutStart}>
-          SIGN OUT
-        </OptionLink>
-      ) : (
-          <OptionLink to='/signin'>SIGN IN</OptionLink>
-        )}
-      <CartIcon />
-    </OptionsContainer>
-    {hidden ? null : <CartDropdown />}
-  </HeaderContainer>
-);
+const Header = () => {
+  const currentUser = useContext(CurrentUserContext)
+  const [hidden, setHidden] = useState(true)
+  const toggleHidden = () => setHidden(!hidden)
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  hidden: selectCartHidden
-});
+  return (
+    <HeaderContainer>
+      <LogoContainer to='/'>
+        <Logo className='logo' />
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to='/shop'>SHOP</OptionLink>
+        <OptionLink to='/shop'>CONTACT</OptionLink>
+        {currentUser ? (
+          <OptionLink as='div' to='/signin' onClick={() => auth.signOutStart()}>
+            SIGN OUT
+          </OptionLink>
+        ) : (
+            <OptionLink to='/signin'>SIGN IN</OptionLink>
+          )}
+        <CartContext.Provider value={{
+          hidden: hidden,
+          toggleHidden
+        }}>
+        <CartIcon />
+        </CartContext.Provider>
+      </OptionsContainer>
+      {hidden ? null : <CartDropdown />}
+    </HeaderContainer>
+  )
+};
 
-const mapDispatchToProps = dispatch =>({
-  signOutStart: () => dispatch(signOutStart())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default Header
