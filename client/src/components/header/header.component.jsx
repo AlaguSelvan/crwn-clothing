@@ -24,9 +24,7 @@ import {
 
 const Header = () => {
   const currentUser = useContext(CurrentUserContext)
-  const [hidden, setHidden] = useState(true)
-  const toggleHidden = () => setHidden(!hidden)
-
+  const { hidden } = useContext(CartContext)
   return (
     <HeaderContainer>
       <LogoContainer to='/'>
@@ -42,12 +40,7 @@ const Header = () => {
         ) : (
             <OptionLink to='/signin'>SIGN IN</OptionLink>
           )}
-        <CartContext.Provider value={{
-          hidden: hidden,
-          toggleHidden
-        }}>
         <CartIcon />
-        </CartContext.Provider>
       </OptionsContainer>
       {hidden ? null : <CartDropdown />}
     </HeaderContainer>

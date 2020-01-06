@@ -10,21 +10,14 @@ import {
 import { CartContext } from '../../providers/cart/cart.provider'
 
 const CartIcon = ({ itemCount }) => {
+  const { cartItemsCount } = useContext(CartContext)
   const { toggleHidden } = useContext(CartContext)
-  const { hidden } = useContext(CartContext)
   return (
     <CartContainer onClick={toggleHidden}>
       <ShoppingIcon className='shopping-icon' />
-      <ItemCountContainer>{itemCount}</ItemCountContainer>
+      <ItemCountContainer>{cartItemsCount}</ItemCountContainer>
     </CartContainer>
   )
 }
 
-const mapStateToProps = (state) => {
-  return ({
-    itemCount: selectCartItemsCount(state)}) 
-}
-
-export default connect(
-  mapStateToProps
-)(CartIcon)
+export default CartIcon
